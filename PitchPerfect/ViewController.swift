@@ -1,6 +1,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+  
+  private lazy var recordButton: UIButton = {
+    let button = UIButton(frame: .zero)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("Record", for: .normal)
+    button.backgroundColor = .red
+    button.addTarget(self, action: #selector(recordAction), for: .touchUpInside)
+    return button
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -11,9 +20,18 @@ class ViewController: UIViewController {
 
 
   private func addViewHierarchy() {
-}
+    view.addSubview(recordButton)
+  }
   
   private func setupConstraints() {
+    NSLayoutConstraint.activate([
+      recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    ])
   }
+  
+  @objc private func recordAction() {
+    print("record button was pressed")
   }
+}
 
