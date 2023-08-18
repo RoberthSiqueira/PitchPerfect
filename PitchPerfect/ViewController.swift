@@ -5,8 +5,7 @@ class ViewController: UIViewController {
   private lazy var recordButton: UIButton = {
     let button = UIButton(frame: .zero)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("Record", for: .normal)
-    button.backgroundColor = .red
+    button.setImage(UIImage(imageLiteralResourceName: "Record"), for: .normal)
     button.addTarget(self, action: #selector(recordAction), for: .touchUpInside)
     return button
   }()
@@ -21,8 +20,7 @@ class ViewController: UIViewController {
   private lazy var stopRecordingButton: UIButton = {
     let button = UIButton(frame: .zero)
     button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle("Stop Recording", for: .normal)
-    button.backgroundColor = .red
+    button.setImage(UIImage(imageLiteralResourceName: "Stop"), for: .normal)
     button.isEnabled = false
     button.addTarget(self, action: #selector(stopRecordingAction), for: .touchUpInside)
     return button
@@ -34,7 +32,6 @@ class ViewController: UIViewController {
     addViewHierarchy()
     setupConstraints()
   }
-
 
   private func addViewHierarchy() {
     view.addSubview(recordButton)
@@ -55,7 +52,9 @@ class ViewController: UIViewController {
     
     NSLayoutConstraint.activate([
       stopRecordingButton.topAnchor.constraint(equalTo: recordingLabel.bottomAnchor, constant: 8),
-      stopRecordingButton.centerXAnchor.constraint(equalTo: recordingLabel.centerXAnchor)
+      stopRecordingButton.centerXAnchor.constraint(equalTo: recordingLabel.centerXAnchor),
+      stopRecordingButton.widthAnchor.constraint(equalToConstant: 64),
+      stopRecordingButton.heightAnchor.constraint(equalToConstant: 64)
     ])
   }
   
