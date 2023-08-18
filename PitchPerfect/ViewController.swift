@@ -10,6 +10,13 @@ class ViewController: UIViewController {
     button.addTarget(self, action: #selector(recordAction), for: .touchUpInside)
     return button
   }()
+  
+  private lazy var recordingLabel: UILabel = {
+    let label = UILabel(frame: .zero)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.text = "Tap to Record"
+    return label
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +28,7 @@ class ViewController: UIViewController {
 
   private func addViewHierarchy() {
     view.addSubview(recordButton)
+    view.addSubview(recordingLabel)
   }
   
   private func setupConstraints() {
@@ -28,6 +36,12 @@ class ViewController: UIViewController {
       recordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       recordButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
     ])
+    
+    NSLayoutConstraint.activate([
+      recordingLabel.topAnchor.constraint(equalTo: recordButton.bottomAnchor, constant: 8),
+      recordingLabel.centerXAnchor.constraint(equalTo: recordButton.centerXAnchor)
+    ])
+    
   }
   
   @objc private func recordAction() {
