@@ -17,6 +17,16 @@ class ViewController: UIViewController {
     label.text = "Tap to Record"
     return label
   }()
+  
+  private lazy var stopRecordingButton: UIButton = {
+    let button = UIButton(frame: .zero)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle("Stop Recording", for: .normal)
+    button.backgroundColor = .red
+    button.isEnabled = false
+    button.addTarget(self, action: #selector(stopRecordingAction), for: .touchUpInside)
+    return button
+  }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,6 +39,7 @@ class ViewController: UIViewController {
   private func addViewHierarchy() {
     view.addSubview(recordButton)
     view.addSubview(recordingLabel)
+    view.addSubview(stopRecordingButton)
   }
   
   private func setupConstraints() {
@@ -42,10 +53,22 @@ class ViewController: UIViewController {
       recordingLabel.centerXAnchor.constraint(equalTo: recordButton.centerXAnchor)
     ])
     
+    NSLayoutConstraint.activate([
+      stopRecordingButton.topAnchor.constraint(equalTo: recordingLabel.bottomAnchor, constant: 8),
+      stopRecordingButton.centerXAnchor.constraint(equalTo: recordingLabel.centerXAnchor)
+    ])
   }
   
   @objc private func recordAction() {
-    print("record button was pressed")
+    recordingLabel.text = "Recording in Progress"
+    recordButton.isEnabled = false
+    stopRecordingButton.isEnabled = true
+  }
+  
+  @objc private func stopRecordingAction() {
+    recordingLabel.text = "Tap to Record"
+    recordButton.isEnabled = true
+    stopRecordingButton.isEnabled = false
   }
 }
 
