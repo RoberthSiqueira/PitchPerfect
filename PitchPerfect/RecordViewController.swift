@@ -58,6 +58,11 @@ class RecordViewController: UIViewController {
     ])
   }
   
+  private func goToPlaybackVC() {
+    let playbackVC = PlaybackViewController()
+    navigationController?.pushViewController(playbackVC, animated: true)
+  }
+  
   @objc private func recordAction() {
     recordingLabel.text = "Recording in Progress"
     recordButton.isEnabled = false
@@ -68,6 +73,7 @@ class RecordViewController: UIViewController {
     recordingLabel.text = "Tap to Record"
     recordButton.isEnabled = true
     stopRecordingButton.isEnabled = false
+    goToPlaybackVC()
   }
 }
 
