@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class RecordViewController: UIViewController {
   
   private lazy var recordButton: UIButton = {
     let button = UIButton(frame: .zero)
