@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  PitchPerfect
-//
-//  Created by Roberth Siqueira on 16/08/23.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
