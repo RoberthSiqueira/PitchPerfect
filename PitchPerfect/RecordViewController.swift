@@ -72,6 +72,31 @@ class RecordViewController: UIViewController {
     recordingLabel.text = "Recording in Progress"
     recordButton.isEnabled = false
     stopRecordingButton.isEnabled = true
+    
+    let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
+    let recordingName = "recordedVoice.wav"
+    let pathArray = [dirPath, recordingName]
+    let filePath = URL(string: pathArray.joined(separator: "/"))
+    print(filePath ?? String())
+    
+    try? audioSession.setCategory(AVAudioSession.Category.playAndRecord,
+                             mode: AVAudioSession.Mode.default,
+                             options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+
+    audioRecorder = try? AVAudioRecorder(url: filePath!, settings: [:])
+    audioRecorder?.isMeteringEnabled = true
+    if audioRecorder?.prepareToRecord() == true {
+      audioRecorder?.record()
+    }
+    
+    // MARK: - Describing the code above
+    
+    // first of all, the UI state changes
+    // then is created a .wav file called "recordedVoice" at a URL diretory on device. That URL at first a changed String joing two items paths separed with a bar
+    // set the session category with some parameters
+    // set audioRecoder with a 'url' and no 'settings' params
+    // prepares the OS
+    // record!
   }
   
   @objc private func stopRecordingAction() {
