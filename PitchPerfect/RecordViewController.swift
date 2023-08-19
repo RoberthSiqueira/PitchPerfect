@@ -82,7 +82,6 @@ class RecordViewController: UIViewController {
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = URL(string: pathArray.joined(separator: "/"))
-        print(filePath ?? String())
 
         try? audioSession.setCategory(AVAudioSession.Category.playAndRecord,
                                       mode: AVAudioSession.Mode.default,
@@ -94,15 +93,6 @@ class RecordViewController: UIViewController {
         if audioRecorder?.prepareToRecord() == true {
             audioRecorder?.record()
         }
-
-        // MARK: - Describing the code above
-
-        // first of all, the UI state changes
-        // then is created a .wav file called "recordedVoice" at a URL diretory on device. That URL at first a changed String joing two items paths separed with a bar
-        // set the session category with some parameters
-        // set audioRecoder with a 'url' and no 'settings' params
-        // prepares the OS
-        // record!
     }
 
     @objc private func stopRecordingAction() {
