@@ -26,12 +26,14 @@ class PlaybackViewController: UIViewController {
     private lazy var slowAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Slow"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
     private lazy var fastAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Fast"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
@@ -47,12 +49,14 @@ class PlaybackViewController: UIViewController {
     private lazy var highAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "HighPitch"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
     private lazy var lowAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "LowPitch"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
@@ -68,12 +72,14 @@ class PlaybackViewController: UIViewController {
     private lazy var echoAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Echo"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
     private lazy var reverbAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Reverb"), for: .normal)
+        button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
@@ -81,6 +87,7 @@ class PlaybackViewController: UIViewController {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(imageLiteralResourceName: "Stop"), for: .normal)
+        button.addTarget(self, action: #selector(stopSoundsAction), for: .touchUpInside)
         return button
     }()
 
@@ -123,4 +130,8 @@ class PlaybackViewController: UIViewController {
             stopButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
+
+    @objc private func playSoundsAction(_ sender: UIButton) { }
+
+    @objc private func stopSoundsAction() { }
 }
