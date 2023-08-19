@@ -108,7 +108,5 @@ class RecordViewController: UIViewController {
 
         audioRecorder?.stop()
         try? audioSession.setActive(false)
-
-        goToPlaybackVC()
     }
 }
