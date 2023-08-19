@@ -1,8 +1,19 @@
+import AVFoundation
 import UIKit
 
 class PlaybackViewController: UIViewController {
     
     var audioRecorderURL: URL
+
+    var recordedAudioURL:URL!
+    var audioFile:AVAudioFile!
+    var audioEngine:AVAudioEngine!
+    var audioPlayerNode: AVAudioPlayerNode!
+    var stopTimer: Timer!
+
+    enum ButtonType: Int {
+        case slow = 0, fast, chipmunk, vader, echo, reverb
+    }
 
     private lazy var playbackOptionsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [speedLineStackView, distanceLineStackView, reflectionLineStackView])
@@ -23,14 +34,14 @@ class PlaybackViewController: UIViewController {
         return stackView
     }()
 
-    private lazy var slowAudioButton: UIButton = {
+    lazy var slowAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Slow"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
-    private lazy var fastAudioButton: UIButton = {
+    lazy var fastAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Fast"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
@@ -46,14 +57,14 @@ class PlaybackViewController: UIViewController {
         return stackView
     }()
 
-    private lazy var highAudioButton: UIButton = {
+    lazy var highAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "HighPitch"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
-    private lazy var lowAudioButton: UIButton = {
+    lazy var lowAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "LowPitch"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
@@ -69,21 +80,21 @@ class PlaybackViewController: UIViewController {
         return stackView
     }()
 
-    private lazy var echoAudioButton: UIButton = {
+    lazy var echoAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Echo"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
-    private lazy var reverbAudioButton: UIButton = {
+    lazy var reverbAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(imageLiteralResourceName: "Reverb"), for: .normal)
         button.addTarget(self, action: #selector(playSoundsAction), for: .touchUpInside)
         return button
     }()
 
-    private lazy var stopButton: UIButton = {
+    lazy var stopButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(imageLiteralResourceName: "Stop"), for: .normal)
@@ -106,6 +117,11 @@ class PlaybackViewController: UIViewController {
         view.backgroundColor = .white
         addViewHierarchy()
         setupConstraints()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureUI(.notPlaying)
     }
 
     private func addViewHierarchy() {
