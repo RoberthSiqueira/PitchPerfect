@@ -5,15 +5,10 @@ class PlaybackViewController: UIViewController {
     
     var audioRecorderURL: URL
 
-    var recordedAudioURL:URL!
     var audioFile:AVAudioFile!
     var audioEngine:AVAudioEngine!
     var audioPlayerNode: AVAudioPlayerNode!
     var stopTimer: Timer!
-
-    enum ButtonType: Int {
-        case slow = 0, fast, chipmunk, vader, echo, reverb
-    }
 
     private lazy var playbackOptionsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [speedLineStackView, distanceLineStackView, reflectionLineStackView])
@@ -115,6 +110,7 @@ class PlaybackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupAudio()
         addViewHierarchy()
         setupConstraints()
     }
@@ -147,7 +143,27 @@ class PlaybackViewController: UIViewController {
         ])
     }
 
-    @objc private func playSoundsAction(_ sender: UIButton) { }
+    @objc private func playSoundsAction(_ sender: UIButton) {
+        if sender == slowAudioButton {
+            playSound(rate: 0.5)
+        } else if sender == fastAudioButton {
+            playSound(rate: 1.5)
+        } else if sender == highAudioButton {
+            playSound(pitch: 1000)
+        } else if sender == lowAudioButton {
+            playSound(pitch: -1000)
+        } else if sender == echoAudioButton {
+            playSound(echo: true)
+        } else if sender == reverbAudioButton {
+            playSound(reverb: true)
+        } else {
+            return
+        }
 
-    @objc private func stopSoundsAction() { }
+        configureUI(.playing)
+    }
+
+    @objc private func stopSoundsAction() {
+        stopAudio()
+    }
 }
