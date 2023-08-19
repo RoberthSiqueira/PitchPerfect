@@ -63,6 +63,12 @@ class RecordViewController: UIViewController {
         ])
     }
 
+    private func setRecordingState(_ recording: Bool) {
+        recordingLabel.text = recording ? "Recording in Progress" : "Tap to Record"
+        recordButton.isEnabled = !recording
+        stopRecordingButton.isEnabled = recording
+    }
+
     func goToPlaybackVC() {
         guard let url = audioRecorder?.url else { return }
         let playbackVC = PlaybackViewController(audioRecorderURL: url)
@@ -70,9 +76,7 @@ class RecordViewController: UIViewController {
     }
 
     @objc private func recordAction() {
-        recordingLabel.text = "Recording in Progress"
-        recordButton.isEnabled = false
-        stopRecordingButton.isEnabled = true
+        setRecordingState(true)
 
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -102,9 +106,7 @@ class RecordViewController: UIViewController {
     }
 
     @objc private func stopRecordingAction() {
-        recordingLabel.text = "Tap to Record"
-        recordButton.isEnabled = true
-        stopRecordingButton.isEnabled = false
+        setRecordingState(false)
 
         audioRecorder?.stop()
         try? audioSession.setActive(false)
