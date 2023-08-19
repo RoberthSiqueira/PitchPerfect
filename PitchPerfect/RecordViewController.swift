@@ -104,6 +104,9 @@ class RecordViewController: UIViewController {
     recordButton.isEnabled = true
     stopRecordingButton.isEnabled = false
     goToPlaybackVC()
+    
+    audioRecorder?.stop()
+    try? audioSession.setActive(false)
   }
 }
 
