@@ -13,6 +13,7 @@
 		4AFCC64A2A8D8F52001A7BE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCC6492A8D8F52001A7BE3 /* Assets.xcassets */; };
 		4AFCC64D2A8D8F52001A7BE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFCC64B2A8D8F52001A7BE3 /* LaunchScreen.storyboard */; };
 		4AFCC6552A8F152B001A7BE3 /* PlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCC6542A8F152B001A7BE3 /* PlaybackViewController.swift */; };
+		4AFCC6572A9042DF001A7BE3 /* RecordViewControlerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCC6562A9042DF001A7BE3 /* RecordViewControlerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4AFCC64C2A8D8F52001A7BE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AFCC64E2A8D8F52001A7BE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AFCC6542A8F152B001A7BE3 /* PlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackViewController.swift; sourceTree = "<group>"; };
+		4AFCC6562A9042DF001A7BE3 /* RecordViewControlerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewControlerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				4AFCC6402A8D8F51001A7BE3 /* AppDelegate.swift */,
 				4AFCC6422A8D8F51001A7BE3 /* SceneDelegate.swift */,
 				4AFCC6442A8D8F51001A7BE3 /* RecordViewController.swift */,
+				4AFCC6562A9042DF001A7BE3 /* RecordViewControlerExtension.swift */,
 				4AFCC6542A8F152B001A7BE3 /* PlaybackViewController.swift */,
 				4AFCC6492A8D8F52001A7BE3 /* Assets.xcassets */,
 				4AFCC64B2A8D8F52001A7BE3 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 				4AFCC6452A8D8F51001A7BE3 /* RecordViewController.swift in Sources */,
 				4AFCC6552A8F152B001A7BE3 /* PlaybackViewController.swift in Sources */,
 				4AFCC6412A8D8F51001A7BE3 /* AppDelegate.swift in Sources */,
+				4AFCC6572A9042DF001A7BE3 /* RecordViewControlerExtension.swift in Sources */,
 				4AFCC6432A8D8F51001A7BE3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

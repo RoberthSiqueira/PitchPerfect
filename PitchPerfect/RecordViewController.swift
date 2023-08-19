@@ -63,9 +63,9 @@ class RecordViewController: UIViewController {
         ])
     }
 
-    private func goToPlaybackVC() {
-        let playbackVC = PlaybackViewController()
-        playbackVC.audioRecorderURL = audioRecorder?.url
+    func goToPlaybackVC() {
+        guard let url = audioRecorder?.url else { return }
+        let playbackVC = PlaybackViewController(audioRecorderURL: url)
         navigationController?.pushViewController(playbackVC, animated: true)
     }
 
