@@ -1,6 +1,11 @@
+import AVFoundation
 import UIKit
 
 class RecordViewController: UIViewController {
+  
+  var audioRecorder: AVAudioRecorder?
+  
+  private var audioSession = AVAudioSession.sharedInstance()
   
   private lazy var recordButton: UIButton = {
     let button = UIButton(frame: .zero)
