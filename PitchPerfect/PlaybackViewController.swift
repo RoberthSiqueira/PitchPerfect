@@ -5,18 +5,19 @@ class PlaybackViewController: UIViewController {
     var audioRecorderURL: URL
 
     private lazy var playbackOptionsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [playbackLineStackView])
+        let stackView = UIStackView(arrangedSubviews: [speedLineStackView, distanceLineStackView, reflectionLineStackView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         stackView.spacing = .zero
         return stackView
     }()
 
-    private lazy var playbackLineStackView: UIStackView = {
+    private lazy var speedLineStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [slowAudioButton, fastAudioButton])
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
+        stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = .zero
         return stackView
@@ -24,9 +25,7 @@ class PlaybackViewController: UIViewController {
 
     private lazy var slowAudioButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(imageLiteralResourceName: "Slow"), for: .normal)
-//        button.addTarget(self, action: #selector(), for: .touchUpInside)
         return button
     }()
 
@@ -78,7 +77,10 @@ class PlaybackViewController: UIViewController {
         return button
     }()
 
-//        button.addTarget(self, action: #selector(), for: .touchUpInside)
+    private lazy var stopButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(imageLiteralResourceName: "Stop"), for: .normal)
         return button
     }()
 
@@ -101,6 +103,7 @@ class PlaybackViewController: UIViewController {
 
     private func addViewHierarchy() {
         view.addSubview(playbackOptionsStackView)
+        view.addSubview(stopButton)
     }
 
     private func setupConstraints() {
@@ -113,10 +116,11 @@ class PlaybackViewController: UIViewController {
         ])
 
         NSLayoutConstraint.activate([
-            playbackOptionsStackView.topAnchor.constraint(equalTo: view.topAnchor),
-            playbackOptionsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8 ),
-            playbackOptionsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            playbackOptionsStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            stopButton.widthAnchor.constraint(equalToConstant: 64),
+            stopButton.heightAnchor.constraint(equalToConstant: 64),
+            stopButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stopButton.topAnchor.constraint(equalTo: playbackOptionsStackView.bottomAnchor, constant: 8),
+            stopButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
 }
